@@ -1,5 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import { CalendarDays, Clock, Hourglass, Timer, UserRound } from "lucide-react"
+import {
+  CalendarDays,
+  Clock,
+  Hourglass,
+  Moon,
+  Sun,
+  Timer,
+  UserRound,
+} from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -14,6 +22,7 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useTheme } from "@/components/theme-provider"
 import {
   onboardingSchedule,
   type ScheduleItem,
@@ -275,6 +284,7 @@ function ScheduleCard({
 
 export function App() {
   const schedule: ScheduleItem[] = onboardingSchedule
+  const { resolvedTheme, setTheme } = useTheme()
   const [now, setNow] = useState(() => new Date())
   const [activeWeek, setActiveWeek] = useState("week-1")
   const [showPastItems, setShowPastItems] = useState(true)
@@ -336,13 +346,25 @@ export function App() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pt-4 pb-72 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-medium text-primary">
-              Onboarding schedule
-            </p>
             <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              ParMed learning plan
+              ParMed Onboarding Schedule
             </h1>
           </div>
+          <Label
+            htmlFor="theme-mode"
+            className="w-fit rounded-2xl border bg-card px-3 py-2 text-sm"
+          >
+            <Sun className="size-4" />
+            <Switch
+              id="theme-mode"
+              size="sm"
+              checked={resolvedTheme === "dark"}
+              onCheckedChange={(checked) =>
+                setTheme(checked ? "dark" : "light")
+              }
+            />
+            <Moon className="size-4" />
+          </Label>
         </div>
 
         <Tabs
@@ -352,12 +374,6 @@ export function App() {
         >
           <div className="sticky top-0 z-20 -mx-4 border-b bg-background/90 px-4 py-3 backdrop-blur-xl sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h2 className="text-lg font-semibold">Full schedule</h2>
-                <p className="text-sm text-muted-foreground">
-                  Browse every onboarding block by week and day.
-                </p>
-              </div>
               <div className="flex flex-wrap items-center gap-3">
                 <Label
                   htmlFor="show-past-items"
