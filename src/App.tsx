@@ -207,23 +207,28 @@ function DashboardCard({
   emptyLabel: string
 }) {
   return (
-    <Card className="border border-border/70 bg-card/95 shadow-sm backdrop-blur">
-      <CardHeader className="gap-2">
-        <CardDescription className="flex items-center gap-2 text-xs font-medium tracking-wider uppercase">
+    <Card
+      size="sm"
+      className="gap-2 border border-border/70 bg-card/95 py-3 shadow-sm backdrop-blur sm:gap-4 sm:py-4"
+    >
+      <CardHeader className="gap-1 px-3 sm:gap-2 sm:px-4">
+        <CardDescription className="flex items-center gap-1.5 text-[0.65rem] font-medium tracking-wider uppercase sm:gap-2 sm:text-xs">
           <Timer className="size-3.5" />
           {label}
         </CardDescription>
-        <CardTitle className="text-lg">
+        <CardTitle className="line-clamp-1 text-sm sm:text-lg">
           {item ? item.agendaItem : emptyLabel}
         </CardTitle>
         {item ? (
           <CardAction>
-            <Badge variant="secondary">{metric}</Badge>
+            <Badge variant="secondary" className="text-[0.65rem] sm:text-xs">
+              {metric}
+            </Badge>
           </CardAction>
         ) : null}
       </CardHeader>
       {item ? (
-        <CardContent className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+        <CardContent className="hidden flex-wrap gap-2 px-3 text-sm text-muted-foreground sm:flex sm:px-4">
           <Badge variant="outline" className="gap-1.5">
             <Clock className="size-3" />
             {formatClock(item.startsAt)} - {formatClock(item.endsAt)}
@@ -238,7 +243,7 @@ function DashboardCard({
           </Badge>
         </CardContent>
       ) : (
-        <CardContent className="text-sm text-muted-foreground">
+        <CardContent className="hidden px-3 text-sm text-muted-foreground sm:block sm:px-4">
           The timed schedule has no matching item for this state.
         </CardContent>
       )}
@@ -348,7 +353,7 @@ export function App() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pt-4 pb-72 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pt-4 pb-36 sm:px-6 sm:pb-72 lg:px-8">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -466,8 +471,8 @@ export function App() {
         </Tabs>
       </div>
 
-      <section className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-4 shadow-[0_-12px_40px_rgb(0_0_0/0.08)] backdrop-blur-xl sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-2">
+      <section className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-3 py-2 shadow-[0_-12px_40px_rgb(0_0_0/0.08)] backdrop-blur-xl sm:px-6 sm:py-4 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-2 sm:gap-3 lg:grid-cols-2">
           <DashboardCard
             label="Current"
             item={current}
