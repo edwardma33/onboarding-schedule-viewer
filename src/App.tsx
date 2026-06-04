@@ -297,7 +297,7 @@ export function App() {
   const { resolvedTheme, setTheme } = useTheme()
   const [now, setNow] = useState(() => new Date())
   const [activeWeek, setActiveWeek] = useState("week-1")
-  const [showPastItems, setShowPastItems] = useState(true)
+  const [showPastItems, setShowPastItems] = useState(false)
   const initialScrollTargetRef = useRef<HTMLDivElement | null>(null)
   const hasScrolledToCurrentRef = useRef(false)
 
