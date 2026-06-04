@@ -11,6 +11,11 @@ import {
 
 import { Badge } from "@/components/ui/badge"
 import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+import {
   Card,
   CardAction,
   CardContent,
@@ -366,6 +371,14 @@ export function App() {
             <Moon className="size-4" />
           </Label>
         </div>
+
+        <Alert variant={"destructive"}>
+          <AlertTitle>Schedule disclaimer</AlertTitle>
+          <AlertDescription>
+            This application reflects the original onboarding schedule and does
+            not show schedule changes.
+          </AlertDescription>
+        </Alert>
 
         <Tabs
           value={activeWeek}
